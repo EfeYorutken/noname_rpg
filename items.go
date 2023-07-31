@@ -1,5 +1,7 @@
 package main
 
+import("fmt")
+
 
 type weapon struct{
 	name string
@@ -44,13 +46,6 @@ var emp_weapon weapon = weapon{
 	power_bonus : 0,
 }
 
-//type helmet struct{ apparel }
-//type chest struct{ apparel }
-//type legging struct{ apparel }
-//type boot struct{ apparel }
-
-	
-
 func get_consumable(name string, hp_bonus int, def_bonus int, t_bonus int, atk_bonus int, power_bonus int) consumable{
 	return consumable{
 		name : name,
@@ -83,4 +78,13 @@ func get_weapon(n string, ab int, pb int) weapon{
 		atk_bonus : ab,
 		power_bonus : pb,
 	}
+}
+
+func use_consumeable(target *character, item consumable) string{
+	target.hp += item.hp_bonus
+	target.atk += item.atk_bonus
+	target.def += item.def_bonus
+	target.power += item.power_bonus
+	target.toughness += item.t_bonus
+	return fmt.Sprintf("%v used %v",target.name,item.name)
 }
